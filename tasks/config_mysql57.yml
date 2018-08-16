@@ -5,6 +5,7 @@
     grep 'temporary password' /var/log/mysqld.log | grep -oE '[^ ]+$'
   register: mysql_root_temp_password
   changed_when: False
+  no_log: True
 
 - name: Create new MySQL root user password
   command: >
