@@ -1,0 +1,30 @@
+---
+
+# These should be included in the play file or inventroy file.
+# project_name: ""
+# env_name: ""
+
+mysql_defaultrepo_version: 80
+
+mysql_yumrepo_rpm: "https://dev.mysql.com/get/mysql{{ mysql_defaultrepo_version }}-community-release-el7-1.noarch.rpm"
+
+mysql_install_version: 5.6
+
+mysql_installrepo_version: "{{ mysql_install_version.split('.')[0]}}{{ mysql_install_version.split('.')[1]}}"
+
+# The database and user definition variables should be included in a vars file of the format {{ project_name }}_{{ env_name }}.yml
+# -----------------------------------
+# Define databases
+mysql_databases: []
+#   - name: example
+#     collation: utf8_bin
+#     encoding: utf8
+
+# Define users
+mysql_users: []
+#   - name: example
+#     host: 127.0.0.1
+#     password: secret
+#     priv: *.*:ALL
+
+# -----------------------------------

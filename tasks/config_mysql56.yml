@@ -1,0 +1,41 @@
+---
+
+- name: Create new MySQL root user password
+  command: >
+    pwmake 128
+  register: mysql_root_password
+  changed_when: False
+  no_log: True
+
+- name: Update MySQL root user password
+  command: >
+    mysql -u root -e
+    'UPDATE mysql.user SET Password = PASSWORD("{{ mysql_root_password.stdout }}")
+    WHERE User = "root"; FLUSH PRIVILEGES;'
+  changed_when: False
+  no_log: True
+
+- name: Put in place root user .my.cnf file
+  template:
+    src: root_my_cnf.j2
+    dest: /root/.my.cnf
+    owner: root
+    group: root
+    mode: 0600
+
+- name: Disallow root remote root login
+  command: >
+    mysql -u root -NBe
+    'DELETE FROM mysql.user WHERE User="root" AND Host NOT IN ("localhost", "127.0.0.1", "::1")'
+  changed_when: False
+
+- name: Remove anonymous MySQL users
+  mysql_user:
+    name: ''
+    host_all: yes
+    state: absent
+
+- name: Remove MySQL test database
+  mysql_db:
+    name: test
+    state: absent

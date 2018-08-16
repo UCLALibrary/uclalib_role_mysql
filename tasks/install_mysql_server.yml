@@ -1,0 +1,22 @@
+---
+
+- name: Install MySQL Packages
+  yum:
+    name: mysql-community-server
+    state: present
+
+- name: Install MySQL python module
+  yum:
+    name: MySQL-python
+    state: present
+
+- name: Ensure password generate tool is installed
+  yum:
+    name: libpwquality
+    state: present
+
+- name: Enable and Start MySQL services
+  service:
+    name: mysqld
+    enabled: yes
+    state: started

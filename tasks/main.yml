@@ -1,0 +1,23 @@
+---
+
+- name: Set-up the MySQL Yum Repoistory on the system
+  include_tasks: setup_mysql_yumrepo.yml
+
+- name: Install the MySQL server on the system
+  include_tasks: install_mysql_server.yml
+
+- name: Configure the MySQL server
+  include_tasks: "config_mysql{{ mysql_installrepo_version }}.yml"
+
+- name: Set Database and User Variables
+  include_vars: "{{ project_name }}_{{ env_name }}.yml"
+  when: (project_name is defined) and (env_name is defined)
+  no_log: True
+
+- name: Create MySQL Databases
+  include_tasks: create_mysql_databases.yml
+  when: mysql_databases is defined
+
+- name: Create MySQL Users
+  include_tasks: create_mysql_users.yml
+  when: mysql_users is defined

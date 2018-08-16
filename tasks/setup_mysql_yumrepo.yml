@@ -1,0 +1,16 @@
+---
+
+- name: Install MySQL yum repository
+  yum:
+    name: "{{ mysql_yumrepo_rpm }}"
+    state: present
+
+- name: Disable default MySQL repository
+  command: >
+    yum-config-manager --disable mysql{{ mysql_defaultrepo_version }}-community
+  when: mysql_defaultrepo_version != mysql_installrepo_version
+
+- name: Enable version-specific MySQL repository
+  command: >
+    yum-config-manager --enable mysql{{ mysql_installrepo_version }}-community
+  when: mysql_defaultrepo_version != mysql_installrepo_version

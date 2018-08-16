@@ -1,0 +1,23 @@
+---
+
+mysql_databases:
+  - name: example_proj_one
+    collation: utf8_bin
+    encoding: utf8
+    state: present
+  - name: example_proj_two
+    collation: utf8_bin
+    encoding: utf8
+    state: present
+
+mysql_users:
+  - name: testuserone
+    host: serverone.example.com
+    password: first_Secret_password1
+    priv: example_proj_one.*:ALL
+    state: present
+  - name: testusertwo
+    host: servertwo.example.com
+    password: second_Secret_password2
+    priv: example_proj_two.*:ALL
+    state: present
