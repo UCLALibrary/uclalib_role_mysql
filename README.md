@@ -12,6 +12,7 @@ Please take note of the following assumptions:
 * the MySQL server uses Red Hat Enterprise Linux 7 as the OS
 * all project-specific variables for this role should be defined in a __vars__ file with a name following the format of `projectname_envname.yml`
     * this vars file will contain sensitive information and should be encrypted with ansible-vault
+    * an example file is available in `vars/exampleproj_test.yml`
 
 Role Variables
 --------------
