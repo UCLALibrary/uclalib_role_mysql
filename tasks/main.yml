@@ -10,6 +10,7 @@
   include_tasks: "config_mysql{{ mysql_installrepo_version }}.yml"
 
 - name: Set Database and User Variables
+  dir: .
   include_vars: "{{ project_name }}_{{ env_name }}.yml"
   when: (project_name is defined) and (env_name is defined)
   no_log: True
