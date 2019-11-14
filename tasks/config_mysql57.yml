@@ -7,6 +7,13 @@
   changed_when: False
   no_log: True
 
+- name: Set MySQL password validation policy to LOW
+  command: >
+    mysql -u root -p{{ mysql_root_temp_password.stdout }} --connect-expired-password
+    -e 'SET GLOBAL validate_password_policy=LOW;'
+  changed_when: False
+  no_log: True
+
 - name: Create new MySQL root user password
   command: >
     pwmake 256
