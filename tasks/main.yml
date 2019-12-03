@@ -16,6 +16,7 @@
   local_action:
     module: stat
     path: "{{ role_path }}/vars/{{ project_name }}_{{ env_name }}.yml"
+  become: False
   register: project_vars_file
 
 - name: Set Database and User Variables
