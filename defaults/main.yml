@@ -1,9 +1,5 @@
 ---
 
-# These should be included in the play file or inventroy file.
-# project_name: ""
-# env_name: ""
-
 mysql_defaultrepo_version: "80"
 
 mysql_yumrepo_rpm: "https://dev.mysql.com/get/mysql{{ mysql_defaultrepo_version }}-community-release-el7-1.noarch.rpm"
