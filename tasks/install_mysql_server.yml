@@ -7,7 +7,7 @@
 
 - name: Install MySQL python module
   yum:
-    name: MySQL-python
+    name: python3-mysql
     state: present
 
 - name: Ensure password generate tool is installed
