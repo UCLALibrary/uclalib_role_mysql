@@ -1,8 +1,17 @@
 ---
 
+- name: Download MySQL yum repository package (works around forbidden bug)
+  get_url:
+    url: "{{ mysql_yumrepo_url }}"
+    dest: /tmp
+    http_agent: curl
+    owner: root
+    group: root
+    mode: '0644'
+
 - name: Install MySQL yum repository
   yum:
-    name: "{{ mysql_yumrepo_rpm }}"
+    name: "/tmp/{{ mysql_yumrepo_rpm }}"
     state: present
 
 - name: Disable default MySQL repository
