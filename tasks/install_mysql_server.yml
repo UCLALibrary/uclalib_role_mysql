@@ -4,6 +4,7 @@
   yum:
     name: mysql-community-server
     state: present
+    disable_excludes: all
 
 - name: Install MySQL python module
   yum:
