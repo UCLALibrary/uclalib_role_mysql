@@ -1,5 +1,10 @@
 ---
 
+- name: Ensure yum-utils are installed
+  package:
+    name: yum-utils
+    state: present
+
 - name: Install MySQL GPG keys
   rpm_key:
     key: '{{ item }}'
