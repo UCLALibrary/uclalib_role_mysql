@@ -30,8 +30,7 @@
 
 - name: Disable default MySQL repository
   command: >
-    yum-config-manager --disable mysql{{ mysql_defaultrepo_version }}-community
-  when: mysql_defaultrepo_version != mysql_installrepo_version
+    yum module -y disable mysql
 
 - name: Enable version-specific MySQL repository
   command: >
