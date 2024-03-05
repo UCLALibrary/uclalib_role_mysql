@@ -1,5 +1,14 @@
 ---
 
+- name: Install MySQL GPG keys
+  rpm_key:
+    key: '{{ item }}'
+    state: present
+  loop:
+    - 'https://repo.mysql.com/RPM-GPG-KEY-mysql'
+    - 'https://repo.mysql.com/RPM-GPG-KEY-mysql-2022'
+    - 'https://repo.mysql.com/RPM-GPG-KEY-mysql-2023'
+
 - name: Download MySQL yum repository package (works around forbidden bug)
   get_url:
     url: "{{ mysql_yumrepo_url }}"
