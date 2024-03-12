@@ -4,10 +4,11 @@
   yum:
     name: mysql-community-server
     state: present
+    disable_excludes: all
 
 - name: Install MySQL python module
   yum:
-    name: MySQL-python
+    name: python3-mysql
     state: present
 
 - name: Ensure password generate tool is installed

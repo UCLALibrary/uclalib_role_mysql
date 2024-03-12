@@ -1,14 +1,36 @@
 ---
 
+- name: Ensure yum-utils are installed
+  package:
+    name: yum-utils
+    state: present
+
+- name: Install MySQL GPG keys
+  rpm_key:
+    key: '{{ item }}'
+    state: present
+  loop:
+    - 'https://repo.mysql.com/RPM-GPG-KEY-mysql'
+    - 'https://repo.mysql.com/RPM-GPG-KEY-mysql-2022'
+    - 'https://repo.mysql.com/RPM-GPG-KEY-mysql-2023'
+
+- name: Download MySQL yum repository package (works around forbidden bug)
+  get_url:
+    url: "{{ mysql_yumrepo_url }}"
+    dest: /tmp
+    http_agent: curl
+    owner: root
+    group: root
+    mode: '0644'
+
 - name: Install MySQL yum repository
   yum:
-    name: "{{ mysql_yumrepo_rpm }}"
+    name: "/tmp/{{ mysql_yumrepo_rpm }}"
     state: present
 
 - name: Disable default MySQL repository
   command: >
-    yum-config-manager --disable mysql{{ mysql_defaultrepo_version }}-community
-  when: mysql_defaultrepo_version != mysql_installrepo_version
+    yum module -y disable mysql
 
 - name: Enable version-specific MySQL repository
   command: >

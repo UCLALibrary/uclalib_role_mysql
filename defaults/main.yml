@@ -2,7 +2,8 @@
 
 mysql_defaultrepo_version: "80"
 
-mysql_yumrepo_rpm: "https://dev.mysql.com/get/mysql{{ mysql_defaultrepo_version }}-community-release-el7-1.noarch.rpm"
+mysql_yumrepo_rpm: "mysql{{ mysql_defaultrepo_version }}-community-release-el8-1.noarch.rpm"
+mysql_yumrepo_url: "https://dev.mysql.com/get/{{ mysql_yumrepo_rpm }}"
 
 mysql_install_version: "5.7"
 
