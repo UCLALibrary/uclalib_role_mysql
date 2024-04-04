@@ -6,8 +6,17 @@
 - name: Install the MySQL server on the system
   include_tasks: install_mysql_server.yml
 
-- name: Configure the MySQL server
+- name: Configure the MySQL Community server
   include_tasks: "config_mysql{{ mysql_installrepo_version }}.yml"
+  when:
+    - ansible_os_family == "RedHat"
+    - ansible_distribution_major_version == "7"
+
+- name: Configure the RHEL MySQL server
+  include_tasks: "config_mysqld.yml"
+  when:
+    - ansible_os_family == "RedHat"
+    - ansible_distribution_major_version == "8"
 
 - name: Create MySQL Databases
   include_tasks: create_mysql_databases.yml
