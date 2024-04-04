@@ -14,6 +14,7 @@ tasks/config_mysql80.yml fqcn[action-core]
 tasks/config_mysql80.yml risky-shell-pipe
 tasks/config_mysql80.yml yaml[octal-values]
 tasks/config_mysql80.yml yaml[truthy]
+tasks/config_mysqld.yml fqcn[action-core]
 tasks/create_mysql_databases.yml fqcn[action]
 tasks/create_mysql_users.yml fqcn[action]
 tasks/create_mysql_users.yml yaml[truthy]
