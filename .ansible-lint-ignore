@@ -1,0 +1,26 @@
+# This file contains ignores rule violations for ansible-lint
+defaults/main.yml jinja[spacing]
+meta/main.yml schema[meta]
+meta/main.yml yaml[indentation]
+tasks/config_mysql56.yml fqcn[action-core]
+tasks/config_mysql56.yml fqcn[action]
+tasks/config_mysql56.yml yaml[octal-values]
+tasks/config_mysql56.yml yaml[truthy]
+tasks/config_mysql57.yml fqcn[action-core]
+tasks/config_mysql57.yml risky-shell-pipe
+tasks/config_mysql57.yml yaml[octal-values]
+tasks/config_mysql57.yml yaml[truthy]
+tasks/config_mysql80.yml fqcn[action-core]
+tasks/config_mysql80.yml risky-shell-pipe
+tasks/config_mysql80.yml yaml[octal-values]
+tasks/config_mysql80.yml yaml[truthy]
+tasks/config_mysqld.yml fqcn[action-core]
+tasks/create_mysql_databases.yml fqcn[action]
+tasks/create_mysql_users.yml fqcn[action]
+tasks/create_mysql_users.yml yaml[truthy]
+tasks/install_mysql_server.yml fqcn[action-core]
+tasks/install_mysql_server.yml yaml[truthy]
+tasks/main.yml fqcn[action-core]
+tasks/setup_mysql_yumrepo.yml command-instead-of-module
+tasks/setup_mysql_yumrepo.yml fqcn[action-core]
+tasks/setup_mysql_yumrepo.yml no-changed-when

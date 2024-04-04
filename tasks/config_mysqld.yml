@@ -1,0 +1,31 @@
+---
+
+- name: Determine MySQL root user temporary password
+  shell: |
+    set -o pipefail
+    grep 'temporary password' /var/log/mysqld.log | grep -oE '[^ ]+$'
+  register: mysql_root_temp_password
+  changed_when: false
+  no_log: true
+
+- name: Create new MySQL root user password
+  command: >
+    pwmake 256
+  register: mysql_root_password
+  changed_when: false
+  no_log: true
+
+- name: Update MySQL root user password
+  command: >
+    mysql -u root -p{{ mysql_root_temp_password.stdout }} --connect-expired-password
+    -e 'ALTER USER "root"@"localhost" IDENTIFIED BY "{{ mysql_root_password.stdout }}";'
+  changed_when: false
+  no_log: true
+
+- name: Put in place root user .my.cnf file
+  template:
+    src: root_my_cnf.j2
+    dest: /root/.my.cnf
+    owner: root
+    group: root
+    mode: '0600'
