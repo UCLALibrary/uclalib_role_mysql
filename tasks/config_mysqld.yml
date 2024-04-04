@@ -1,7 +1,8 @@
 ---
 
 - name: Determine MySQL root user temporary password
-  shell: >
+  shell: |
+    set -o pipefail
     grep 'temporary password' /var/log/mysqld.log | grep -oE '[^ ]+$'
   register: mysql_root_temp_password
   changed_when: false
