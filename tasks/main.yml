@@ -8,6 +8,8 @@
 
 - name: Install the MySQL server on the system
   include_tasks: install_mysql_server.yml
+  tags:
+    - install-mysqlserver
 
 - name: Configure the MySQL Community server
   include_tasks: "config_mysql{{ mysql_installrepo_version }}.yml"
@@ -24,7 +26,11 @@
 - name: Create MySQL Databases
   include_tasks: create_mysql_databases.yml
   when: mysql_databases is defined
+  tags:
+    - create-databases
 
 - name: Create MySQL Users
   include_tasks: create_mysql_users.yml
   when: mysql_users is defined
+  tags:
+    - create-users
